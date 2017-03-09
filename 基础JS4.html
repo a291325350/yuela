@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<head>
+		<meta charset="{CHARSET}">
+		<title>JS基础课程4</title>
+	</head>
+	<style>
+		*{margin: 0; padding: 0;}
+		body{padding: 10px;}
+		ul li{width: 40px; height: 40px; background: red; line-height: 40px; float: left; list-style: none; margin-left: 2px; text-align: center; margin-top: 10px;}
+	</style>
+	<body>
+		<input type="number"  id="num" name="num" value=""/>
+        <button id="unShift">左侧入</button>
+        <button id="push">右侧入</button>
+        <button id="shift">左侧出</button>
+        <button id="pop">右侧出</button>
+		<ul>
+			<li>10</li>
+			<li>17</li>
+			<li>160</li>
+			<li>133</li>
+			<li>15</li>
+			<li>19</li>
+		</ul>
+	</body>
+    <script type="text/javascript">
+	
+	var data=[];
+	var li =document.getElementsByTagName("li");
+		for(var i=0;i<li.length;i++){
+			data.push(li[i].innerHTML);
+		}
+	//左侧入效果 unshift() 方法可向数组的开头添加一个或更多元素。，并返回新的长度
+	var leftIn =document.getElementById("unShift");
+	var rightIn =document.getElementById("push");
+	var leftOut =document.getElementById("shift");
+	var rightOut =document.getElementById("pop");
+	var ul =document.getElementsByTagName("ul")[0];
+	
+	
+	    function Del(){
+	    	for(var i = 0;i<li.length;i++){
+	    	    li[i].index = i;
+	    	    li[i].onclick = function(){
+	    	        data.splice(this.index,1);
+	    	        showLi(data);
+	            }
+	     
+	        }
+	    }
+		//显示效果
+	 function showLi(data){
+	    	removeAllLi();
+	    	for(var j=0;j<data.length;j++){
+	    		var liCreate = document.createElement("li");
+	    		liCreate.innerHTML = data[j];
+	    		document.getElementsByTagName("ul")[0].appendChild(liCreate);
+	    	}
+	    }
+	    function removeAllLi(){
+	    	var _li = ul.getElementsByTagName('li');
+	    	for(var i=_li.length-1;i>=0;i--){
+	    		ul.removeChild(_li[i]);
+	    	}
+	    }
+	  leftIn.onclick = function(){
+	    	var num = document.getElementById("num").value;
+	    	data.unshift(num);
+	    	showLi(data);
+	    }
+	  
+	   rightIn.onclick = function(){
+		   var num = document.getElementById("num").value;
+		   data.push(num);
+		   showLi(data);
+		   }
+		leftOut.onclick = function(){
+			data.shift();
+			showLi(data);
+			}
+		rightOut.onclick = function(){
+			data.pop();
+			showLi(data);
+			}
+		ul.onclick = function(){
+			Del();
+			}
+</script>
+</html>
